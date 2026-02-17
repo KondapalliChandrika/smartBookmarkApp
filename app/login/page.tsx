@@ -12,13 +12,15 @@ export default function LoginPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const router = useRouter();
-    const supabase = createClient();
 
     const handleGoogleLogin = async () => {
         setIsLoading(true);
         setError('');
 
         try {
+            // Create Supabase client only when the button is clicked
+            const supabase = createClient();
+
             // Get the redirect URL safely for both server and client
             const redirectUrl = typeof window !== 'undefined'
                 ? `${window.location.origin}/auth/callback`
