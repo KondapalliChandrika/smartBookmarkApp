@@ -61,7 +61,7 @@ export default function DeleteConfirmModal({
 
                             {/* Message */}
                             <p className="text-text-secondary text-center mb-6">
-                                Are you sure you want to delete <span className="font-semibold text-text-primary">"{bookmarkTitle}"</span>? This action cannot be undone.
+                                Are you sure you want to delete <span className="font-semibold text-text-primary">&ldquo;{bookmarkTitle}&rdquo;</span>? This action cannot be undone.
                             </p>
 
                             {/* Buttons */}

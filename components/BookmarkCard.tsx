@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import type { Bookmark } from '@/types/bookmark';
 
 interface BookmarkCardProps {
@@ -49,9 +50,11 @@ export default function BookmarkCard({ bookmark, onDeleteClick }: BookmarkCardPr
                     {/* Favicon */}
                     {getFavicon(bookmark.url) && (
                         <div className="w-12 h-12 rounded-xl bg-background-lighter flex items-center justify-center flex-shrink-0 ring-1 ring-white/10">
-                            <img
+                            <Image
                                 src={getFavicon(bookmark.url)!}
                                 alt=""
+                                width={32}
+                                height={32}
                                 className="w-8 h-8"
                                 onError={(e) => {
                                     e.currentTarget.style.display = 'none';
