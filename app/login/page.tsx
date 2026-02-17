@@ -23,11 +23,13 @@ export default function LoginPage() {
             // Create Supabase client only when the button is clicked
             const supabase = createClient();
 
-            // Get the redirect URL safely for both server and client
-            const redirectUrl = typeof window !== 'undefined'
-                ? `${window.location.origin}/auth/callback`
-                : `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`;
+            // Get the redirect URL - use window.location.origin in browser, fallback to env var
+            const baseUrl = typeof window !== 'undefined'
+                ? window.location.origin
+                : process.env.NEXT_PUBLIC_SITE_URL;
 
+            const redirectUrl = `${baseUrl}/auth/callback`;
+            console.log("Redirecting to:", redirectUrl);
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
