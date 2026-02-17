@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 // Force dynamic rendering to prevent static generation errors
 export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+export const preferredRegion = 'auto';
 
 export default function LoginPage() {
     const [isLoading, setIsLoading] = useState(false);
