@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = 'force-dynamic';
+
 export default function LoginPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -16,10 +19,15 @@ export default function LoginPage() {
         setError('');
 
         try {
+            // Get the redirect URL safely for both server and client
+            const redirectUrl = typeof window !== 'undefined'
+                ? `${window.location.origin}/auth/callback`
+                : `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`;
+
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    redirectTo: `${window.location.origin}/auth/callback`,
+                    redirectTo: redirectUrl,
                 },
             });
 
